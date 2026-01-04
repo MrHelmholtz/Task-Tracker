@@ -7,8 +7,8 @@ public class Goal extends AbstractAim{
     private int incompletedTasksCount;
     private ArrayList<Task> tasks;
 
-    Goal(String name, LocalDateTime creationDate, String comment, int tasksTotalCount, ArrayList<Task> tasks){
-        super(name, creationDate, comment);
+    Goal(String name, LocalDateTime creationDate, String description, int tasksTotalCount, ArrayList<Task> tasks){
+        super(name, creationDate, description);
         this.tasksTotalCount = tasksTotalCount;
         this.completedTasksCount = 0;
         this.incompletedTasksCount = this.tasksTotalCount;

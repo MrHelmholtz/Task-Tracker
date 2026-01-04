@@ -5,13 +5,13 @@ public abstract class AbstractAim {
     private LocalDateTime creationDate;
     private LocalDateTime finishingDate;
     private Boolean isCompleted;
-    private String comment;
+    private String description;
 
-    AbstractAim(String name, LocalDateTime creationDate, String comment){
+    AbstractAim(String name, LocalDateTime creationDate, String description){
         this.name = name;
         this.creationDate = creationDate;
         this.isCompleted = false;
-        this.comment = comment;
+        this.description = description;
     }
 
     public String getName(){
@@ -46,11 +46,11 @@ public abstract class AbstractAim {
         isCompleted = completed;
     }
 
-    public String getComment() {
-        return comment;
+    public String getDescription() {
+        return description;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

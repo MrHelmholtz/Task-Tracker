@@ -7,11 +7,11 @@ public class AppBuilder implements Builder{
 
     private String[] getNameAndDescription(String target){
         System.out.println("It's time to create a "+target+"...");
-        System.out.println("Enter the "+target+"'s name: ");
+        System.out.print("Enter the "+target+"'s name: ");
         String name = Helper.scan.nextLine();
         String description;
         if(Helper.yesOrNoMenu("Does "+name+" need a description")){
-            System.out.println("Enter "+target+"'s description: ");
+            System.out.print("Enter "+target+"'s description: ");
             description = Helper.scan.nextLine();
         } else description = "No description";
 
