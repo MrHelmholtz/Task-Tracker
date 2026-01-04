@@ -4,7 +4,7 @@ import java.util.ArrayList;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Library lib = new Library("my lib", new ArrayList<>());
+        Library lib = new Library("my lib", "desc", new ArrayList<>());
         System.out.println(lib.getName());
         lib.setName("new name");
         System.out.println(lib.getName());
