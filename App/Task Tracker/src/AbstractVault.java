@@ -34,4 +34,11 @@ public abstract class AbstractVault {
     public void setData(ArrayList<?> data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "\n"+this.getClass().getName()+"'s \"" + name+"\" info:"
+                +"\nName: "+name
+                +"\nDescription: "+description;
+    }
 }

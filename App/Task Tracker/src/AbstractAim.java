@@ -9,9 +9,10 @@ public abstract class AbstractAim {
 
     AbstractAim(String name, LocalDateTime creationDate, String description){
         this.name = name;
-        this.creationDate = creationDate;
-        this.isCompleted = false;
         this.description = description;
+        this.isCompleted = false;
+        this.creationDate = creationDate;
+//        this.finishingDate = null;
     }
 
     public String getName(){
@@ -53,4 +54,17 @@ public abstract class AbstractAim {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString(){
+        return "\n"+this.getClass().getName()+"'s \"" + name+"\" info:"
+                +"\nName: "+name
+                +"\nDescription: "+description
+                +"\nCreation date: "+creationDate
+                +"\nFinishing date: "+ (finishingDate == null ? "hasn't been finished" : finishingDate)
+                +"\nIs completed: "+ isCompleted;
+
+    }
+
+
 }

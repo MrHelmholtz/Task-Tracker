@@ -46,4 +46,13 @@ public class Goal extends AbstractAim{
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
+
+    @Override
+    public String toString(){
+        return super.toString()
+                +"\nTotal tasks count:"+tasksTotalCount
+                +"\nCompleted tasks count:"+completedTasksCount
+                +"\nIncompleted tasks count:"+incompletedTasksCount;
+    }
 }
