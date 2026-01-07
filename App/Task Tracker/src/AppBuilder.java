@@ -23,7 +23,7 @@ public class AppBuilder implements Builder{
     public Library buildLibrary() {
 
         String[] nameAndDescription = getNameAndDescription("library");
-        System.out.println("Congratulations! Your "+nameAndDescription[0]+" library has been successfully created.");
+        System.out.println("\nCongratulations! Your "+nameAndDescription[0]+" library has been successfully created.");
         ArrayList<Section> data = new ArrayList<Section>();
         return new Library(nameAndDescription[0], nameAndDescription[1], data);
     }
@@ -31,7 +31,7 @@ public class AppBuilder implements Builder{
     @Override
     public Section buildSection() {
         String[] nameAndDescription = getNameAndDescription("section");
-        System.out.println("Congratulations! Your "+nameAndDescription[0]+" section has been successfully created.");
+        System.out.println("\nCongratulations! Your "+nameAndDescription[0]+" section has been successfully created.");
         ArrayList<Goal> data = new ArrayList<Goal>();
         return new Section(nameAndDescription[0], nameAndDescription[1], data);
         }
