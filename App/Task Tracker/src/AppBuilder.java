@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,16 +41,38 @@ public class AppBuilder implements Builder{
     @Override
     public Goal buildGoal(){
         String[] nameAndDescription = getNameAndDescription("goal");
-        LocalDateTime creationDate = LocalDateTime.now();
+        LocalDate creationDate = LocalDate.now();
         ArrayList<Task> data = new ArrayList<Task>();
         int taskTotalCount = data.size();
         return new Goal(nameAndDescription[0], creationDate, nameAndDescription[1], taskTotalCount, data);
     }
 
+    public StrictGoal buildStrictGoal(){
+        String[] nameAndDescription = getNameAndDescription("strict goal");
+        LocalDate creationDate = LocalDate.now();
+        ArrayList<Task> data = new ArrayList<Task>();
+        int taskTotalCount = data.size();
+        System.out.print("\nEnter the goal's deadline:");
+        LocalDate deadlineDate = LocalDate.parse(Helper.scan.nextLine(),
+                                                         DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        return new StrictGoal(nameAndDescription[0], creationDate, nameAndDescription[1], taskTotalCount, data,
+                              deadlineDate);
+    }
+
     @Override
     public Task buildTask(){
         String[] nameAndDescription = getNameAndDescription("task");
-        LocalDateTime creationDate = LocalDateTime.now();
+        LocalDate creationDate = LocalDate.now();
         return new Task(nameAndDescription[0], creationDate, nameAndDescription[1]);
     }
+
+    public StrictTask buildStrictTask(){
+        String[] nameAndDescription = getNameAndDescription("strict task");
+        LocalDate creationDate = LocalDate.now();
+        System.out.print("\nEnter the task's deadline:");
+        LocalDate deadlineDate = LocalDate.parse(Helper.scan.nextLine(),
+                DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        return new StrictTask(nameAndDescription[0], creationDate, nameAndDescription[1], deadlineDate);
+    }
+
 }

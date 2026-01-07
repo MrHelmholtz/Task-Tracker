@@ -1,13 +1,14 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public abstract class AbstractAim {
     private String name;
-    private LocalDateTime creationDate;
-    private LocalDateTime finishingDate;
+    private LocalDate creationDate;
+    private LocalDate finishingDate;
     private Boolean isCompleted;
     private String description;
 
-    AbstractAim(String name, LocalDateTime creationDate, String description){
+    AbstractAim(String name, LocalDate creationDate, String description){
         this.name = name;
         this.description = description;
         this.isCompleted = false;
@@ -23,19 +24,19 @@ public abstract class AbstractAim {
         this.name = name;
     }
 
-    public LocalDateTime getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
-    public LocalDateTime getFinishingDate() {
+    public LocalDate getFinishingDate() {
         return finishingDate;
     }
 
-    public void setFinishingDate(LocalDateTime finishingDate) {
+    public void setFinishingDate(LocalDate finishingDate) {
         this.finishingDate = finishingDate;
     }
 

@@ -1,7 +1,7 @@
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Task extends AbstractAim{
-    Task(String name, LocalDateTime creationDate, String description){
+    Task(String name, LocalDate creationDate, String description){
         super(name,creationDate, description);
     }
 
