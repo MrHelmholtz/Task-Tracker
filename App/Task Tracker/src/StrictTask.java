@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 
-public class StrictTask extends Task{
+public class StrictTask extends Task implements StrictAim{
 
     private LocalDate deadlineDate;
 
@@ -10,10 +10,12 @@ public class StrictTask extends Task{
         this.deadlineDate = deadlineDate;
     }
 
+    @Override
     public LocalDate getDeadlineDate() {
         return deadlineDate;
     }
 
+    @Override
     public void setDeadlineDate(LocalDate deadlineDate) {
         this.deadlineDate = deadlineDate;
     }
