@@ -21,4 +21,48 @@ public class Helper {
         scan.nextLine(); // Remove '\r' after scan.nextInt()
         return looper == 1;
     }
+
+    static int makeMenu(String question, String ... options){
+        int looper = -1;
+        byte counter = 0;
+        System.out.println(question);
+        for (int i = 0; i < options.length; i++) {
+            System.out.println(i + 1 + ")" + options[i]);
+        }
+        while(looper < 1 || looper > options.length){
+            counter++;
+            looper = scan.nextInt();
+            if(counter % 5 == 0){
+                System.out.println("Well, you could forget, what the question was...");
+                System.out.println(question);
+                for (int i = 0; i < options.length; i++) {
+                    System.out.println(i + 1 + ")" + options[i]);
+                }
+            }
+        }
+        scan.nextLine(); // Remove '\r' after scan.nextInt()
+        return looper;
+    }
+
+    static int adjustMenu(String question){
+        int looper = -1;
+        byte counter = 0;
+        System.out.println(question);
+        System.out.println("1)Name");
+        System.out.println("2)Description");
+        System.out.println("3)Data");
+        while(looper < 1 || looper > 3){
+            counter++;
+            looper = scan.nextInt();
+            if(counter % 5 == 0){
+                System.out.println("Well, you could forget, what the question was...");
+                System.out.println(question);
+                System.out.println("1)Name");
+                System.out.println("2)Description");
+                System.out.println("3)Data");
+            }
+        }
+        scan.nextLine(); // Remove '\r' after scan.nextInt()
+        return looper;
+    }
 }

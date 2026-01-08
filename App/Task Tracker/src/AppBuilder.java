@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class AppBuilder implements Builder{
@@ -26,7 +27,7 @@ public class AppBuilder implements Builder{
 
         String[] nameAndDescription = getNameAndDescription("library");
         System.out.println("\nCongratulations! Your "+nameAndDescription[0]+" library has been successfully created.");
-        ArrayList<Section> data = new ArrayList<Section>();
+        HashMap<String , Section> data = new HashMap<String , Section>();
         return new Library(nameAndDescription[0], nameAndDescription[1], data);
     }
 
@@ -34,7 +35,7 @@ public class AppBuilder implements Builder{
     public Section buildSection() {
         String[] nameAndDescription = getNameAndDescription("section");
         System.out.println("\nCongratulations! Your "+nameAndDescription[0]+" section has been successfully created.");
-        ArrayList<Goal> data = new ArrayList<Goal>();
+        HashMap<String , Goal> data = new HashMap<String , Goal>();
         return new Section(nameAndDescription[0], nameAndDescription[1], data);
         }
 
