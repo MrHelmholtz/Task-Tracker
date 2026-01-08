@@ -1,7 +1,7 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Library extends AbstractVault{
-    Library(String name, String description, ArrayList<Section> data){
+    Library(String name, String description, HashMap<?, ?> data){
         super(name,description, data);
     }
 

@@ -1,7 +1,7 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Section extends AbstractVault{
-    Section(String name, String description, ArrayList<Goal> data){
+    Section(String name, String description, HashMap<?, ?> data){
         super(name,description, data);
     }
 

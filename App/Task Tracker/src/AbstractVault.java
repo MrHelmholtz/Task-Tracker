@@ -1,11 +1,11 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class AbstractVault {
     String name;
     String description;
-    ArrayList<?> data;
+    HashMap<?, ?> data;
 
-    AbstractVault(String name, String description, ArrayList<?> data){
+    AbstractVault(String name, String description, HashMap<?, ?> data){
         this.name = name;
         this.description = description;
         this.data = data;
@@ -27,11 +27,11 @@ public abstract class AbstractVault {
         this.description = description;
     }
 
-    public ArrayList<?> getData() {
+    public HashMap<?, ?> getData() {
         return data;
     }
 
-    public void setData(ArrayList<?> data) {
+    public void setData(HashMap<?, ?> data) {
         this.data = data;
     }
 
