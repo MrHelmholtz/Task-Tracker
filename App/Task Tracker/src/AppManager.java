@@ -15,12 +15,12 @@ public class AppManager extends Manager{
     }
 
     @Override
-    public void addLibrary() {
+    public void add() {
         keeper.setLibrary(builder.buildLibrary());
     }
 
     @Override
-    public void deleteLibrary() {
+    public void delete() {
         if(Helper.yesOrNoMenu("\nAre you sure, you want to delete "+keeper.getLibrary().getName()+" library?"))
         {
             keeper.setLibrary(null);
@@ -28,14 +28,7 @@ public class AppManager extends Manager{
         }
     }
 
-    @Override
-    public void adjustLibrary() {
-        if(Helper.yesOrNoMenu("\nAre you sure you want to delete "+keeper.getLibrary().getName()+" library?"))
-        {
-            keeper.setLibrary(null);
-            System.out.println("\nLibrary has been successfully deleted");
-        }
-    }
+
 
     public <T extends AbstractVault> void adjust(T vault) {
         switch (Helper.makeMenu("\nWhat do you want to adjust in "
@@ -183,7 +176,6 @@ public class AppManager extends Manager{
         System.out.println("\nUpdated deadline date:");
         System.out.println(strictAim.getDeadlineDate());
     }
-
 
     private void adjustTasks(Goal goal){
         ArrayList<Task> tasks = goal.getTasks();
