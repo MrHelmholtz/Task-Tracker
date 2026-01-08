@@ -19,8 +19,6 @@ public class Main {
         System.out.println(buildTestTask());
         System.out.println(buildTestStrictGoal());
         System.out.println(buildTestStrictTask());
-
-
     }
 
 
