@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -95,27 +96,56 @@ public class AppManager extends Manager{
         }
     }
 
-    public void adjust(StrictGoal goal){
+    public void adjust(StrictGoal strictGoal){
         switch (Helper.makeMenu("\nWhat do you want to adjust in "
-                + goal.getClass() + " " + goal.getName() + "?", "Name", "Description", "Data", "Deadline date")){
+                + strictGoal.getClass() + " " + strictGoal.getName() + "?", "Name", "Description", "Data", "Deadline date")){
             case 1:
-                adjustName(goal);
+                adjustName(strictGoal);
                 break;
             case 2:
-                adjustDescription(goal);
+                adjustDescription(strictGoal);
                 break;
 
             case 3:
-                adjustTasks(goal);
+                adjustTasks(strictGoal);
                 break;
             case 4:
+                adjustDeadlineDate(strictGoal);
+                break;
 
         }
     }
 
+    public void adjust(Task task){
+        switch (Helper.makeMenu("\nWhat do you want to adjust in "
+                + task.getClass() + " " + task.getName() + "?", "Name", "Description")){
+            case 1:
+                adjustName(task);
+                break;
+            case 2:
+                adjustDescription(task);
+                break;
+        }
+    }
 
+    public void adjust(StrictTask strictTask){
+        switch (Helper.makeMenu("\nWhat do you want to adjust in "
+                + strictTask.getClass() + " " + strictTask.getName() + "?", "Name", "Description", "Deadline date")){
+            case 1:
+                adjustName(strictTask);
+                break;
+            case 2:
+                adjustDescription(strictTask);
+                break;
 
-    private static void adjustName(AbstractData object){
+            case 3:
+                adjustDeadlineDate(strictTask);
+                break;
+
+        }
+    }
+
+    private void adjustName(AbstractData object){
         System.out.println("\nCurrent name: " + object.getName());
         System.out.print("Enter new name: ");
         object.setName(Helper.scan.nextLine());
@@ -124,7 +154,7 @@ public class AppManager extends Manager{
         System.out.println(object.getName());
     }
 
-    private static void adjustDescription(AbstractData object){
+    private void adjustDescription(AbstractData object){
         System.out.println("\nCurrent description: " + object.getDescription());
 
         if (Helper.makeMenu("\nDo you want to append new info to the description" +
@@ -143,27 +173,19 @@ public class AppManager extends Manager{
         System.out.println(object.getDescription());
     }
 
-    private static void adjustDeadline(AbstractData object){
-        System.out.println("\nCurrent description: " + object.getDescription());
+    private void adjustDeadlineDate(StrictAim strictAim){
+        System.out.println("\nCurrent deadline date: " + strictAim.getDeadlineDate());
 
-        if (Helper.makeMenu("\nDo you want to append new info to the description" +
-                " or replace the description?", "Append", "Replace") == 1) {
-            System.out.print("\nEnter description to append: ");
-            object.setDescription(object.getDescription() + "\n\nAdded" + LocalDate.now() +
-                    ":\n" + Helper.scan.nextLine());
-            System.out.println("\nUpdated description:");
-            System.out.println(object.getDescription());
-        } else {
-            System.out.print("Enter new description: ");
-            object.setName(Helper.scan.nextLine());
-        }
-        System.out.println("\nDescription has been successfully modified!");
-        System.out.println("\nUpdated description:");
-        System.out.println(object.getDescription());
+        System.out.print("Enter new deadline date(in format 'day.month.year'): ");
+        strictAim.setDeadlineDate(LocalDate.parse(Helper.scan.nextLine(),
+                DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        System.out.println("\nDeadline date has been successfully changed!");
+        System.out.println("\nUpdated deadline date:");
+        System.out.println(strictAim.getDeadlineDate());
     }
 
 
-    private static void adjustTasks(Goal goal){
+    private void adjustTasks(Goal goal){
         ArrayList<Task> tasks = goal.getTasks();
         System.out.println("\n"+goal.getClass() + " " + goal.getName() +" contains:");
         if(tasks.isEmpty()){
@@ -177,9 +199,9 @@ public class AppManager extends Manager{
         Task taskToAdjust = tasks.get(Helper.scan.nextInt()-1);
         Helper.scan.nextLine();
         if(taskToAdjust instanceof StrictTask) {
-//            adjust((StrictTask) taskToAdjust);
+            adjust((StrictTask) taskToAdjust);
         } else{
-//            adjust(taskToAdjust);
+            adjust(taskToAdjust);
         }
     }
 
