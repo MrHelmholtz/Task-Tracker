@@ -19,6 +19,9 @@ public class Main {
         addSectionTest();
         addSectionTest();
         addSectionTest();
+        manager.addGoal();
+        System.out.println(keeper.getLibrary());
+        System.out.println(keeper.getLibrary().getData());
 
     }
 
@@ -35,7 +38,7 @@ public class Main {
     public static void addLibraryTest(){
         changeScannerPath("\\buildTests\\libraryWithDesc.txt");
         manager.addLibrary();
-        System.out.println(keeper.getLibrary());
+//        System.out.println(keeper.getLibrary());
         resetScannerPath();
     }
 
@@ -46,8 +49,8 @@ public class Main {
         }
         changeScannerPath("\\buildTests\\sectionWithDesc.txt");
         manager.addSection();
-        System.out.println(keeper.getLibrary());
-        System.out.println(keeper.getLibrary().getData());
+//        System.out.println(keeper.getLibrary());
+//        System.out.println(keeper.getLibrary().getData());
         resetScannerPath();
     }
 
@@ -63,6 +66,53 @@ public class Main {
     }
 
 
+
+
+
+    public static Library buildTestLibrary() {
+        changeScannerPath("\\buildTests\\libraryWithDesc.txt");
+        Library library = builder.buildLibrary();
+        resetScannerPath();
+        return library;
+    }
+    public static Section buildTestSection(){
+        changeScannerPath("\\buildTests\\sectionWithDesc.txt");
+        Section section = builder.buildSection();
+        section.setName(section.getName() +" "+ Math.round(Math.random()*1000)); // make unique names for adding to library
+        resetScannerPath();
+        return section;
+    }
+    public static Goal buildTestGoal() {
+        changeScannerPath("\\buildTests\\goalWithDesc.txt");
+        Goal goal = builder.buildGoal();
+        goal.setName(goal.getName() + " "+ Math.round(Math.random()*1000));
+        resetScannerPath();
+        return goal;
+    }
+    public static StrictGoal buildTestStrictGoal() {
+        changeScannerPath("\\buildTests\\strictGoalWithDesc.txt");
+        StrictGoal strictGoal = builder.buildStrictGoal();
+        strictGoal.setName(strictGoal.getName() +" "+ Math.round(Math.random()*1000));
+        resetScannerPath();
+        return strictGoal;
+    }
+    public static Task buildTestTask() {
+        changeScannerPath("\\buildTests\\taskWithDesc.txt");
+        Task task = builder.buildTask();
+        task.setName(task.getName() +" "+ Math.round(Math.random()*1000));
+
+        resetScannerPath();
+        return task;
+    }
+    public static StrictTask buildTestStrictTask(){
+        changeScannerPath("\\buildTests\\strictTaskWithDesc.txt");
+        StrictTask strictTask = builder.buildStrictTask();
+        strictTask.setName(strictTask.getName() +" "+ Math.round(Math.random()*1000));
+        resetScannerPath();
+        return strictTask;
+    }
+
+
     public static void changeScannerPath(String pathEnd){
         try{
             Helper.scan = new Scanner(Path.of("C:\\Users\\Lenovo\\My projects\\Task_and_Goals_tracker\\App" +
@@ -75,53 +125,6 @@ public class Main {
     public static void resetScannerPath(){
         Helper.scan = new Scanner(System.in);
     }
-
-
-    public static Library buildTestLibrary() {
-        changeScannerPath("\\buildTests\\libraryWithDesc.txt");
-        Library library = builder.buildLibrary();
-        resetScannerPath();
-        return library;
-    }
-    public static Section buildTestSection(){
-        changeScannerPath("\\buildTests\\sectionWithDesc.txt");
-        Section section = builder.buildSection();
-        section.setName(section.getName() + Math.random()*100); // make unique names for adding to library
-        resetScannerPath();
-        return section;
-    }
-    public static Goal buildTestGoal() {
-        changeScannerPath("\\buildTests\\goalWithDesc.txt");
-        Goal goal = builder.buildGoal();
-        goal.setName(goal.getName() + Math.random()*100);
-        resetScannerPath();
-        return goal;
-    }
-    public static StrictGoal buildTestStrictGoal() {
-        changeScannerPath("\\buildTests\\strictGoalWithDesc.txt");
-        StrictGoal strictGoal = builder.buildStrictGoal();
-        strictGoal.setName(strictGoal.getName() + Math.random()*100);
-        resetScannerPath();
-        return strictGoal;
-    }
-    public static Task buildTestTask() {
-        changeScannerPath("\\buildTests\\taskWithDesc.txt");
-        Task task = builder.buildTask();
-        task.setName(task.getName() + Math.random()*100);
-
-        resetScannerPath();
-        return task;
-    }
-    public static StrictTask buildTestStrictTask(){
-        changeScannerPath("\\buildTests\\strictTaskWithDesc.txt");
-        StrictTask strictTask = builder.buildStrictTask();
-        strictTask.setName(strictTask.getName() + Math.random()*100);
-        resetScannerPath();
-        return strictTask;
-    }
-
-
-
 
 
 }

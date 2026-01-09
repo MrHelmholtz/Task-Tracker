@@ -1,9 +1,9 @@
 public interface Manager {
-    public void add();
+    public void addLibrary();
     public void delete();
-    public void adjust();
+    public void adjust(AbstractVault vault);
 
-    public void complete();
+//    public void complete();
 
 
 }

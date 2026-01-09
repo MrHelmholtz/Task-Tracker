@@ -27,7 +27,7 @@ public abstract class AbstractData {
 
     @Override
     public String toString() {
-        return "\n"+this.getClass().getName()+"'s \"" + name+"\" info:"
+        return "\n\n"+this.getClass().getName()+"'s \"" + name+"\" info:"
                 +"\nName: "+name
                 +"\nDescription: "+description;
     }

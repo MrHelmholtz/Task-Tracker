@@ -7,6 +7,7 @@ public class Library extends AbstractVault{
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString()
+                +" sections";
     }
 }

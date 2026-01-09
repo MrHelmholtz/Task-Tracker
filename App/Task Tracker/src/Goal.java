@@ -51,8 +51,8 @@ public class Goal extends AbstractAim{
     @Override
     public String toString(){
         return super.toString()
-                +"\nTotal tasks count:"+tasksTotalCount
-                +"\nCompleted tasks count:"+completedTasksCount
-                +"\nIncompleted tasks count:"+incompletedTasksCount;
+                +"\nTotal tasks count: "+tasksTotalCount
+                +"\nCompleted tasks count: "+completedTasksCount
+                +"\nIncompleted tasks count: "+incompletedTasksCount;
     }
 }

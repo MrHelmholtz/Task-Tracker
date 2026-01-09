@@ -18,6 +18,7 @@ public abstract class AbstractVault extends AbstractData{
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString()
+                +"\nContains: "+data.size();
     }
 }
