@@ -6,10 +6,13 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static public AppBuilder builder = new AppBuilder();
+    static public AppManager manager = new AppManager();
 
     public static void main(String[] args) throws IOException {
 
         printAllTestObjects();
+
+//        adjustLibraryTest();
     }
 
     public static void printAllTestObjects() throws IOException {
@@ -25,80 +28,63 @@ public class Main {
 
     public static void adjustLibraryTest() {
         Library lib = buildTestLibrary();
+        manager.adjust(lib);
+        System.out.println(lib);
+//        manager.adjust(lib);
+//        System.out.println(lib);
+//        manager.adjust(lib);
+//        System.out.println(lib);
     }
 
-    public static Library buildTestLibrary() {
+
+    public static void changeScannerPath(String pathEnd){
         try{
             Helper.scan = new Scanner(Path.of("C:\\Users\\Lenovo\\My projects\\Task_and_Goals_tracker\\App" +
-                    "\\Task Tracker\\Tests\\buildTests\\libraryWithDesc.txt"));
+                    "\\Task Tracker\\Tests"+pathEnd));
 
         } catch (IOException e) {
             System.out.println("IOException: "+e);
         }
-        Library library = builder.buildLibrary();
+    }
+    public static void resetScannerPath(){
         Helper.scan = new Scanner(System.in);
-        return library;
     }
 
 
+    public static Library buildTestLibrary() {
+        changeScannerPath("\\buildTests\\libraryWithDesc.txt");
+        Library library = builder.buildLibrary();
+        resetScannerPath();
+        return library;
+    }
     public static Section buildTestSection(){
-        try{
-        Helper.scan = new Scanner(Path.of("C:\\Users\\Lenovo\\My projects\\Task_and_Goals_tracker\\App" +
-                "\\Task Tracker\\Tests\\buildTests\\sectionWithDesc.txt"));
-        } catch (IOException e) {
-            System.out.println("IOException: "+e);
-        }
+        changeScannerPath("\\buildTests\\sectionWithDesc.txt");
         Section section = builder.buildSection();
-        Helper.scan = new Scanner(System.in);
+        resetScannerPath();
         return section;
     }
     public static Goal buildTestGoal() {
-        try{
-
-        Helper.scan = new Scanner(Path.of("C:\\Users\\Lenovo\\My projects\\Task_and_Goals_tracker\\App" +
-                "\\Task Tracker\\Tests\\buildTests\\goalWithDesc.txt"));
-    } catch (IOException e) {
-        System.out.println("IOException: "+e);
-    }
+        changeScannerPath("\\buildTests\\goalWithDesc.txt");
         Goal goal = builder.buildGoal();
-        Helper.scan = new Scanner(System.in);
+        resetScannerPath();
         return goal;
     }
     public static StrictGoal buildTestStrictGoal() {
-        try{
-
-        Helper.scan = new Scanner(Path.of("C:\\Users\\Lenovo\\My projects\\Task_and_Goals_tracker\\App" +
-                "\\Task Tracker\\Tests\\buildTests\\strictGoalWithDesc.txt"));
-    } catch (IOException e) {
-        System.out.println("IOException: "+e);
-        }
+        changeScannerPath("\\buildTests\\strictGoalWithDesc.txt");
         StrictGoal strictGoal = builder.buildStrictGoal();
-        Helper.scan = new Scanner(System.in);
+        resetScannerPath();
         return strictGoal;
     }
     public static Task buildTestTask() {
-        try{
-
-        Helper.scan = new Scanner(Path.of("C:\\Users\\Lenovo\\My projects\\Task_and_Goals_tracker\\App" +
-                "\\Task Tracker\\Tests\\buildTests\\taskWithDesc.txt"));
-    } catch (IOException e) {
-        System.out.println("IOException: "+e);
-        }
+        changeScannerPath("\\buildTests\\taskWithDesc.txt");
         Task task = builder.buildTask();
-        Helper.scan = new Scanner(System.in);
+        resetScannerPath();
         return task;
     }
-
     public static StrictTask buildTestStrictTask(){
-        try{
-
-        Helper.scan = new Scanner(Path.of("C:\\Users\\Lenovo\\My projects\\Task_and_Goals_tracker\\App" +
-                "\\Task Tracker\\Tests\\buildTests\\strictTaskWithDesc.txt"));
-    } catch (IOException e) {
-        System.out.println("IOException: "+e);
-        }
+        changeScannerPath("\\buildTests\\strictTaskWithDesc.txt");
         StrictTask strictTask = builder.buildStrictTask();
-        Helper.scan = new Scanner(System.in);
+        resetScannerPath();
         return strictTask;
     }
 
