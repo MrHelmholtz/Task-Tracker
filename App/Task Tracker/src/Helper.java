@@ -22,16 +22,14 @@ public class Helper {
         return looper == 1;
     }
 
-    static int makeMenu(String question, String ... options){
+    static int selectOption(String question, String ...options){
         int looper = -1;
         byte counter = 0;
         System.out.println(question);
-        for (int i = 0; i < options.length; i++) {
-            System.out.println(i + 1 + ")" + options[i]);
-        }
-        while(looper < 1 || looper > options.length){
+        showOptions(options);
+        while(looper < 1 || looper > options.length+1){
             counter++;
-            looper = scan.nextInt();
+            looper = scan.nextInt() - 1;
             if(counter % 5 == 0){
                 System.out.println("Well, you could forget, what the question was...");
                 System.out.println(question);
@@ -40,8 +38,21 @@ public class Helper {
                 }
             }
         }
+
+
+
         scan.nextLine(); // Remove '\r' after scan.nextInt()
         return looper;
+    }
+
+    static void showOptions(String ...options){
+        if (options.length == 0){
+            System.out.println("No available options");
+        }
+        for (int i = 0; i < options.length; i++) {
+            System.out.println(i + 1 + ")" + options[i]);
+        }
+        System.out.println(options.length+1+")"+"Exit");
     }
 
     static int adjustMenu(String question){
