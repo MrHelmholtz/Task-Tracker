@@ -55,6 +55,76 @@ public class AppManager implements Manager{
     }
 
 
+
+
+    public String showAndSelectOptionForHashmap(AbstractVault vault,String purpose){
+        System.out.println("\n"+vault.getClass().getName() + " " + vault.getName() +" contains:");
+        if(vault.getData().isEmpty()){
+            System.out.println(vault.getClass().getName() + " " + vault.getName() +" doesn't contain anything.");
+            return null;
+        }
+        int i = 1;
+        HashMap<String , ?> data = (HashMap<String, ?>) vault.getData();
+        HashMap<Integer, String> map = new HashMap<>();
+        for (String key: (Set<String>) data.keySet()){
+            System.out.println(i+")"+data.get(key).getClass().getName()+" "+key);
+            map.put(i, key);
+            i++;
+        }
+        System.out.print(purpose + "\nEnter number:");
+        String selectedOption = map.get(Helper.scan.nextInt());
+        Helper.scan.nextLine();
+
+        return selectedOption;
+    }
+
+    public String selectOption(HashMap<Integer, String > optionsMap){
+        System.out.println("\n"+vault.getClass().getName() + " " + vault.getName() +" contains:");
+        if(vault.getData().isEmpty()){
+            System.out.println(vault.getClass().getName() + " " + vault.getName() +" doesn't contain anything.");
+            return null;
+        }
+        int i = 1;
+        HashMap<String , ?> data = (HashMap<String, ?>) vault.getData();
+        HashMap<Integer, String> map = new HashMap<>();
+        for (String key: (Set<String>) data.keySet()){
+            System.out.println(i+")"+data.get(key).getClass().getName()+" "+key);
+            map.put(i, key);
+            i++;
+        }
+        System.out.print(purpose + "\nEnter number:");
+        String selectedOption = map.get(Helper.scan.nextInt());
+        Helper.scan.nextLine();
+
+        return selectedOption;
+    }
+
+
+    public String showAndSelectOptionForArrayList(Goal goal, String purpose){
+        ArrayList<Task> tasks = goal.getTasks();
+        System.out.println("\n"+goal.getClass().getName() + " " + goal.getName() +" contains:");
+        if(tasks.isEmpty()){
+            System.out.println(goal.getClass().getName() + " " + goal.getName() +" doesn't contain anything.");
+            return null;
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(i+1+")"+tasks.get(i).getClass()+" "+tasks.get(i).getName());
+        }
+        System.out.print(purpose+"\nEnter number:");
+        Task taskToAdjust = tasks.get(Helper.scan.nextInt()-1);
+        Helper.scan.nextLine();
+        if(taskToAdjust instanceof StrictTask) {
+            adjust((StrictTask) taskToAdjust);
+        } else{
+            adjust(taskToAdjust);
+        }
+        System.out.print(purpose + "\nEnter number:");
+        String selectedOption = map.get(Helper.scan.nextInt());
+        Helper.scan.nextLine();
+
+        return selectedOption;
+    }
+
     @Override
     public void adjust(AbstractVault vault) {
         switch (Helper.makeMenu("\nWhat do you want to adjust in "
@@ -84,52 +154,6 @@ public class AppManager implements Manager{
 
         }
 
-    }
-
-    public String showAndSelectOptionForHashmap(AbstractVault vault,String purpose){
-        System.out.println("\n"+vault.getClass().getName() + " " + vault.getName() +" contains:");
-        if(vault.getData().isEmpty()){
-            System.out.println(vault.getClass().getName() + " " + vault.getName() +" doesn't contain anything.");
-            return null;
-        }
-        int i = 1;
-        HashMap<String , ?> data = (HashMap<String, ?>) vault.getData();
-        HashMap<Integer, String> map = new HashMap<>();
-        for (String key: (Set<String>) data.keySet()){
-            System.out.println(i+")"+data.get(key).getClass().getName()+" "+key);
-            map.put(i, key);
-            i++;
-        }
-        System.out.print(purpose + "\nEnter number:");
-        String selectedOption = map.get(Helper.scan.nextInt());
-        Helper.scan.nextLine();
-
-        return selectedOption;
-    }
-
-    public String showAndSelectOptionForArrayList(Goal goal, String purpose){
-        ArrayList<Task> tasks = goal.getTasks();
-        System.out.println("\n"+goal.getClass().getName() + " " + goal.getName() +" contains:");
-        if(tasks.isEmpty()){
-            System.out.println(goal.getClass().getName() + " " + goal.getName() +" doesn't contain anything.");
-            return null;
-        }
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i+1+")"+tasks.get(i).getClass()+" "+tasks.get(i).getName());
-        }
-        System.out.print(purpose+"\nEnter number:");
-        Task taskToAdjust = tasks.get(Helper.scan.nextInt()-1);
-        Helper.scan.nextLine();
-        if(taskToAdjust instanceof StrictTask) {
-            adjust((StrictTask) taskToAdjust);
-        } else{
-            adjust(taskToAdjust);
-        }
-        System.out.print(purpose + "\nEnter number:");
-        String selectedOption = map.get(Helper.scan.nextInt());
-        Helper.scan.nextLine();
-
-        return selectedOption;
     }
 
     public void adjust(Goal goal){

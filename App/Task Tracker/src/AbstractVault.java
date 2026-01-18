@@ -1,18 +1,19 @@
-import java.util.HashMap;
+import java.util.ArrayList;
+
 
 public abstract class AbstractVault extends AbstractData{
-    HashMap<?, ?> data;
+    ArrayList<?> data;
 
-    AbstractVault(String name, String description, HashMap<?, ?> data){
+    AbstractVault(String name, String description, ArrayList<?> data){
         super(name, description);
         this.data = data;
     }
 
-    public HashMap<?, ?> getData() {
+    public ArrayList<?> getData() {
         return data;
     }
 
-    public void setData(HashMap<?, ?> data) {
+    public void setData(ArrayList<?> data) {
         this.data = data;
     }
 
