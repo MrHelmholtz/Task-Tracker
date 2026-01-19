@@ -14,13 +14,16 @@ public class Main {
 
 //        printAllTestObjects();
 //        adjustLibraryTest();
-
+//
         addLibraryTest();
-        addSectionTest();
-        addSectionTest();
+//        addSectionTest();
+//        addSectionTest();
         addSectionTest();
         manager.addGoal();
-        System.out.println(keeper.getLibrary());
+        manager.addTask();
+//        System.out.println(keeper.getLibrary());
+
+        System.out.println(keeper.getLibrary().getData());
         System.out.println(keeper.getLibrary().getData());
 
     }
@@ -52,6 +55,18 @@ public class Main {
 //        System.out.println(keeper.getLibrary());
 //        System.out.println(keeper.getLibrary().getData());
         resetScannerPath();
+    }
+
+    public static void addGoalTest(){
+        if(keeper.getLibrary() == null){
+            System.out.println("Library is not initialized");
+            return;
+        }
+//        changeScannerPath("\\buildTests\\goalWithDesc.txt");
+        manager.addGoal();
+//        System.out.println(keeper.getLibrary());
+//        System.out.println(keeper.getLibrary().getData());
+//        resetScannerPath();
     }
 
     public static void adjustLibraryTest() {

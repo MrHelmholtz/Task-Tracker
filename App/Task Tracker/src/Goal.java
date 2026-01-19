@@ -21,6 +21,7 @@ public class Goal extends AbstractAim{
 
     public void setTasksTotalCount(int tasksTotalCount) {
         this.tasksTotalCount = tasksTotalCount;
+        incompletedTasksCount = tasksTotalCount - completedTasksCount;
     }
 
     public int getCompletedTasksCount() {

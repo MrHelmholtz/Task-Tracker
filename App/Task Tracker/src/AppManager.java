@@ -28,46 +28,99 @@ public class AppManager implements Manager{
     }
 
     public void addGoal(){
+        Section selectedSection = selectSection();
+        ArrayList<Goal> data = (ArrayList<Goal>) selectedSection.getData();
+        int decision = Helper.selectOption("Do you want to create a regular goal or a strict goal?",
+                "Regular goal", "Strict goal");
+        if(decision == 0){
+//            Goal newGoal = builder.buildGoal();
+            Goal newGoal = Main.buildTestGoal(); // for test purposes
+            data.add(newGoal);
+        }else{
+//            StrictGoal newGoal = builder.buildStrictGoal();
+            StrictGoal newGoal = Main.buildTestStrictGoal(); // for test purposes
+            data.add(newGoal);
+        }
+    }
+
+    public void addTask(){
+        Section selectedSection = selectSection();
+        Goal selectedGoal = selectGoal(selectedSection);
+        ArrayList<Task> data = (ArrayList<Task>) selectedGoal.getTasks();
+        int decision = Helper.selectOption("Do you want to create a regular task or a strict task?",
+                "Regular task", "Strict task");
+        if(decision == 0){
+//            Task newTask = builder.buildTask();
+            Task newTask = Main.buildTestTask(); // for test purposes
+            data.add(newTask);
+        }else{
+//            StrictTask newTask = builder.buildStrictTask();
+            StrictTask newTask = Main.buildTestStrictTask(); // for test purposes
+            data.add(newTask);
+        }
+
+        selectedGoal.setTasksTotalCount(selectedGoal.getTasksTotalCount() + 1);
+    }
+
+    public Section selectSection(){
         ArrayList<Section> sections = (ArrayList<Section>) keeper.getLibrary().getData();
-        ListIterator<Section> sectionsIterator = sections.listIterator();
-
-
         String[] sectionNames = new String[sections.size()];
-
         for (int i = 0; i < sections.size(); i++) {
             Section section = sections.get(i);
             sectionNames[i] = section.getClass().getName() +" "+section.getName();
         }
-
-//        while(sectionsIterator.hasNext()){
-//            Section section = sectionsIterator.next();
-//            sectionNames.
-//        }
-//        String[] sectionNames = (String[]) sections.stream().map((section) -> {
-//                                return section.getClass().getName() +" "+section.getName();
-//                                                                                      }).toArray();
-
-//        String[] sectionNames = new String[sections.size()+5];
-//        sections.toArray(sectionNames);
-
-
-        int selectedSectionNumber = Helper.selectOption("To which section do you want to add a goal?",
-                                                       sectionNames);
-
-        if( selectedSectionNumber > sections.size()) return;
+        int selectedSectionNumber = Helper.selectOption("To which section do you want to add something?",
+                sectionNames);
+        if( selectedSectionNumber > sections.size()) return null;
         Section selectedSection = sections.get(selectedSectionNumber);
-        ArrayList<Goal> data = (ArrayList<Goal>) selectedSection.getData();
-        int decision = Helper.selectOption("Do you want to create a regular goal or a strict goal?",
-                "Goal", "Strict goal");
-        if(decision == 0){
-            Goal newGoal = builder.buildGoal();
-//            Goal newGoal = Main.buildTestGoal(); // for test purposes
-            data.add(newGoal);
-        }else{
-            StrictGoal newGoal = builder.buildStrictGoal();
-//            StrictGoal newGoal = Main.buildTestStrictGoal(); // for test purposes
-            data.add(newGoal);
+        return selectedSection;
+    }
+
+
+
+    public Goal selectGoal(Section section){
+        ArrayList<Goal> goals = (ArrayList<Goal>) section.getData();
+        String[] goalNames = new String[goals.size()];
+        for (int i = 0; i < goals.size(); i++) {
+            Goal goal = goals.get(i);
+            goalNames[i] = goal.getClass().getName() +" "+goal.getName();
         }
+        int selectedGoalNumber = Helper.selectOption("To which goal do you want to add something?",
+                goalNames);
+        if( selectedGoalNumber > goals.size()) return null;
+        Goal selectedGoal = goals.get(selectedGoalNumber);
+        return selectedGoal;
+    }
+
+    public AbstractAim createAim(String type, Boolean isStrict){
+
+        AbstractAim newAim;
+        switch(type){
+            case "goal":
+                if(isStrict){
+//            newAim = builder.buildStrictGoal();
+                    newAim = Main.buildTestStrictGoal(); // for test purposes
+
+                }else{
+
+//                    newAim = builder.buildGoal();
+                    newAim = Main.buildTestGoal(); // for test purposes
+                }
+                break;
+            case "task":
+                if(isStrict){
+//                    newAim = builder.buildStrictTask();
+                    newAim = Main.buildTestStrictTask(); // for test purposes
+                }else{
+//                    newAim = builder.buildTask();
+                    newAim = Main.buildTestTask(); // for test purposes
+                }
+                break;
+            default:
+                newAim = null;
+        }
+
+        return newAim;
     }
 
     @Override
