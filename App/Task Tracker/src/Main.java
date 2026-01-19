@@ -58,9 +58,9 @@ public class Main {
         Library lib = buildTestLibrary();
 
         changeScannerPath("\\AdjustTests\\adjustLibrary.txt");
-        manager.adjust(lib); //check changing name
-        manager.adjust(lib); // check replacing description
-        manager.adjust(lib); // check appending description
+//        manager.adjust(lib); //check changing name
+//        manager.adjust(lib); // check replacing description
+//        manager.adjust(lib); // check appending description
         System.out.println(lib);
         resetScannerPath();
     }

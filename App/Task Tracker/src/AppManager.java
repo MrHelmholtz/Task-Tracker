@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ListIterator;
 import java.util.Set;
 
 public class AppManager implements Manager{
@@ -28,11 +29,30 @@ public class AppManager implements Manager{
 
     public void addGoal(){
         ArrayList<Section> sections = (ArrayList<Section>) keeper.getLibrary().getData();
-        String[] sectionNames = (String[]) sections.stream().map((section) -> {
-                                return section.getClass().getName() +" "+section.getName();
-                                                                                      }).toArray();
+        ListIterator<Section> sectionsIterator = sections.listIterator();
+
+
+        String[] sectionNames = new String[sections.size()];
+
+        for (int i = 0; i < sections.size(); i++) {
+            Section section = sections.get(i);
+            sectionNames[i] = section.getClass().getName() +" "+section.getName();
+        }
+
+//        while(sectionsIterator.hasNext()){
+//            Section section = sectionsIterator.next();
+//            sectionNames.
+//        }
+//        String[] sectionNames = (String[]) sections.stream().map((section) -> {
+//                                return section.getClass().getName() +" "+section.getName();
+//                                                                                      }).toArray();
+
+//        String[] sectionNames = new String[sections.size()+5];
+//        sections.toArray(sectionNames);
+
+
         int selectedSectionNumber = Helper.selectOption("To which section do you want to add a goal?",
-                                                        sectionNames);
+                                                       sectionNames);
 
         if( selectedSectionNumber > sections.size()) return;
         Section selectedSection = sections.get(selectedSectionNumber);

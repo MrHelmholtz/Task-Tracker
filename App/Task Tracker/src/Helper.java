@@ -29,7 +29,7 @@ public class Helper {
         showOptions(options);
         while(looper < 1 || looper > options.length+1){
             counter++;
-            looper = scan.nextInt() - 1;
+            looper = scan.nextInt();
             if(counter % 5 == 0){
                 System.out.println("Well, you could forget, what the question was...");
                 System.out.println(question);
@@ -42,7 +42,7 @@ public class Helper {
 
 
         scan.nextLine(); // Remove '\r' after scan.nextInt()
-        return looper;
+        return looper-1;
     }
 
     static void showOptions(String ...options){
