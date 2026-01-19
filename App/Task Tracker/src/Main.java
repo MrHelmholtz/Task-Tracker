@@ -12,6 +12,18 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        int choice;
+        do {
+            choice = Helper.selectOption("Welcome to Task Tracker 1.0!\nWhat do you want to do?",
+                    "View tasks", "Add tasks", "Exit");
+            switch (choice) {
+                case 0:
+                    Section selectedSection = manager.selectSection();
+                    Goal selectedGoal = manager.selectGoal(selectedSection);
+
+            }
+        } while (choice != 2);
+
 //        printAllTestObjects();
 //        adjustLibraryTest();
 //
@@ -38,15 +50,15 @@ public class Main {
     }
 
 
-    public static void addLibraryTest(){
+    public static void addLibraryTest() {
         changeScannerPath("\\buildTests\\libraryWithDesc.txt");
         manager.addLibrary();
 //        System.out.println(keeper.getLibrary());
         resetScannerPath();
     }
 
-    public static void addSectionTest(){
-        if(keeper.getLibrary() == null){
+    public static void addSectionTest() {
+        if (keeper.getLibrary() == null) {
             System.out.println("Library is not initialized");
             return;
         }
@@ -57,8 +69,8 @@ public class Main {
         resetScannerPath();
     }
 
-    public static void addGoalTest(){
-        if(keeper.getLibrary() == null){
+    public static void addGoalTest() {
+        if (keeper.getLibrary() == null) {
             System.out.println("Library is not initialized");
             return;
         }
@@ -81,63 +93,66 @@ public class Main {
     }
 
 
-
-
-
     public static Library buildTestLibrary() {
         changeScannerPath("\\buildTests\\libraryWithDesc.txt");
         Library library = builder.buildLibrary();
         resetScannerPath();
         return library;
     }
-    public static Section buildTestSection(){
+
+    public static Section buildTestSection() {
         changeScannerPath("\\buildTests\\sectionWithDesc.txt");
         Section section = builder.buildSection();
-        section.setName(section.getName() +" "+ Math.round(Math.random()*1000)); // make unique names for adding to library
+        section.setName(section.getName() + " " + Math.round(Math.random() * 1000)); // make unique names for adding to library
         resetScannerPath();
         return section;
     }
+
     public static Goal buildTestGoal() {
         changeScannerPath("\\buildTests\\goalWithDesc.txt");
         Goal goal = builder.buildGoal();
-        goal.setName(goal.getName() + " "+ Math.round(Math.random()*1000));
+        goal.setName(goal.getName() + " " + Math.round(Math.random() * 1000));
         resetScannerPath();
         return goal;
     }
+
     public static StrictGoal buildTestStrictGoal() {
         changeScannerPath("\\buildTests\\strictGoalWithDesc.txt");
         StrictGoal strictGoal = builder.buildStrictGoal();
-        strictGoal.setName(strictGoal.getName() +" "+ Math.round(Math.random()*1000));
+        strictGoal.setName(strictGoal.getName() + " " + Math.round(Math.random() * 1000));
         resetScannerPath();
         return strictGoal;
     }
+
     public static Task buildTestTask() {
         changeScannerPath("\\buildTests\\taskWithDesc.txt");
         Task task = builder.buildTask();
-        task.setName(task.getName() +" "+ Math.round(Math.random()*1000));
+        task.setName(task.getName() + " " + Math.round(Math.random() * 1000));
 
         resetScannerPath();
         return task;
     }
-    public static StrictTask buildTestStrictTask(){
+
+    public static StrictTask buildTestStrictTask() {
         changeScannerPath("\\buildTests\\strictTaskWithDesc.txt");
         StrictTask strictTask = builder.buildStrictTask();
-        strictTask.setName(strictTask.getName() +" "+ Math.round(Math.random()*1000));
+        strictTask.setName(strictTask.getName() + " " + Math.round(Math.random() * 1000));
         resetScannerPath();
         return strictTask;
     }
 
 
-    public static void changeScannerPath(String pathEnd){
-        try{
+    public static void changeScannerPath(String pathEnd) {
+        try {
             Helper.scan = new Scanner(Path.of("C:\\Users\\Lenovo\\My projects\\Task_and_Goals_tracker\\App" +
-                    "\\Task Tracker\\Tests"+pathEnd));
+                    "\\Task Tracker\\Tests" + pathEnd));
 
         } catch (IOException e) {
-            System.out.println("IOException: "+e);
+            System.out.println("IOException: " + e);
         }
     }
-    public static void resetScannerPath(){
+
+    public static void resetScannerPath() {
         Helper.scan = new Scanner(System.in);
     }
 

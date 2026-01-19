@@ -69,7 +69,7 @@ public class AppManager implements Manager{
             Section section = sections.get(i);
             sectionNames[i] = section.getClass().getName() +" "+section.getName();
         }
-        int selectedSectionNumber = Helper.selectOption("To which section do you want to add something?",
+        int selectedSectionNumber = Helper.selectOption("Which section do you want to select?",
                 sectionNames);
         if( selectedSectionNumber > sections.size()) return null;
         Section selectedSection = sections.get(selectedSectionNumber);
@@ -85,7 +85,7 @@ public class AppManager implements Manager{
             Goal goal = goals.get(i);
             goalNames[i] = goal.getClass().getName() +" "+goal.getName();
         }
-        int selectedGoalNumber = Helper.selectOption("To which goal do you want to add something?",
+        int selectedGoalNumber = Helper.selectOption("Which goal do you want to select?",
                 goalNames);
         if( selectedGoalNumber > goals.size()) return null;
         Goal selectedGoal = goals.get(selectedGoalNumber);
