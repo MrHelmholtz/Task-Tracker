@@ -1,5 +1,5 @@
 public class AppKeeper extends Keeper{
-    AppKeeper(){
-
+    AppKeeper(Library library){
+super(library);
     }
 }

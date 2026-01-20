@@ -1,38 +1,93 @@
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Random;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static public AppBuilder builder = new AppBuilder();
-    static public AppKeeper keeper = new AppKeeper();
-    static public AppManager manager = new AppManager(keeper, builder);
+    static public AppKeeper keeper = new AppKeeper(buildTestLibrary());
+    static public AppChecker checker = new AppChecker();
+    static public AppManager manager = new AppManager(keeper, builder, checker);
 
     public static void main(String[] args) throws IOException {
 
-        int choice;
+        int mainChoice;
+        String[] mainMenuOptions = {"View", "Add"};
+        int innerChoice;
+        String[] innerMenuOptions;
         do {
-            choice = Helper.selectOption("Welcome to Task Tracker 1.0!\nWhat do you want to do?",
-                    "View tasks", "Add tasks", "Exit");
-            switch (choice) {
-                case 0:
-                    Section selectedSection = manager.selectSection();
-                    Goal selectedGoal = manager.selectGoal(selectedSection);
-
+            if(checker.isNull(keeper.getLibrary(), "Library isn't initialized.")){
+                return;
             }
-        } while (choice != 2);
+            mainChoice = Helper.selectOption("\nWelcome to Task Tracker 1.0!\nWhat do you want to do?",
+                    mainMenuOptions);
+            Section selectedSection;
+            Goal selectedGoal;
+            switch (mainChoice) {
+
+
+
+                case 0:
+
+                    innerMenuOptions = new String[]{"View sections", "View goals", "View tasks"};
+                    do{
+                        innerChoice = Helper.selectOption("\nWhat do you want to view?",
+                                innerMenuOptions);
+
+                        switch (innerChoice){
+                            case 0:
+                                manager.viewSections();
+                                break;
+                            case 1:
+                                selectedSection = manager.selectSection();
+                                manager.viewGoals(selectedSection);
+                                break;
+                            case 2:
+                                selectedSection = manager.selectSection();
+                                selectedGoal = manager.selectGoal(selectedSection);
+                                manager.viewTasks(selectedGoal);
+                                break;
+                        }
+
+                    }while(innerChoice != innerMenuOptions.length);
+                    break;
+
+                case 1:
+                    innerMenuOptions = new String[]{"Add section", "Add goal", "Add task"};
+                    do{
+                        innerChoice = Helper.selectOption("\nWhat do you want to add?",
+                                innerMenuOptions);
+
+                        switch (innerChoice){
+                            case 0:
+                                manager.addSection();
+                                break;
+                            case 1:
+                                selectedSection = manager.selectSection();
+                                manager.addGoal(selectedSection);
+                                break;
+                            case 2:
+                                selectedSection = manager.selectSection();
+                                selectedGoal = manager.selectGoal(selectedSection);
+                                manager.addTask(selectedGoal);
+                                break;
+                        }
+
+                    }while(innerChoice != innerMenuOptions.length);
+                    break;
+            }
+        } while (mainChoice != mainMenuOptions.length);
 
 //        printAllTestObjects();
 //        adjustLibraryTest();
 //
-        addLibraryTest();
+//        addLibraryTest();
 //        addSectionTest();
 //        addSectionTest();
-        addSectionTest();
-        manager.addGoal();
-        manager.addTask();
+//        addSectionTest();
+//        manager.addGoal();
+//        manager.addTask();
 //        System.out.println(keeper.getLibrary());
 
         System.out.println(keeper.getLibrary().getData());
@@ -75,7 +130,7 @@ public class Main {
             return;
         }
 //        changeScannerPath("\\buildTests\\goalWithDesc.txt");
-        manager.addGoal();
+//        manager.addGoal();
 //        System.out.println(keeper.getLibrary());
 //        System.out.println(keeper.getLibrary().getData());
 //        resetScannerPath();

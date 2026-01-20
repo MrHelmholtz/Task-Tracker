@@ -8,11 +8,13 @@ import java.util.Set;
 public class AppManager implements Manager{
     private AppKeeper keeper;
     private AppBuilder builder;
+    private AppChecker checker;
 
 
-    AppManager(AppKeeper keeper, AppBuilder builder){
+    AppManager(AppKeeper keeper, AppBuilder builder, AppChecker checker){
         this.keeper = keeper;
         this.builder = builder;
+        this.checker = checker;
     }
 
     @Override
@@ -27,9 +29,8 @@ public class AppManager implements Manager{
         sections.add(newSection);
     }
 
-    public void addGoal(){
-        Section selectedSection = selectSection();
-        ArrayList<Goal> data = (ArrayList<Goal>) selectedSection.getData();
+    public void addGoal(Section section){
+        ArrayList<Goal> data = (ArrayList<Goal>) section.getData();
         int decision = Helper.selectOption("Do you want to create a regular goal or a strict goal?",
                 "Regular goal", "Strict goal");
         if(decision == 0){
@@ -43,10 +44,9 @@ public class AppManager implements Manager{
         }
     }
 
-    public void addTask(){
-        Section selectedSection = selectSection();
-        Goal selectedGoal = selectGoal(selectedSection);
-        ArrayList<Task> data = (ArrayList<Task>) selectedGoal.getTasks();
+    public void addTask(Goal goal){
+
+        ArrayList<Task> data = (ArrayList<Task>) goal.getTasks();
         int decision = Helper.selectOption("Do you want to create a regular task or a strict task?",
                 "Regular task", "Strict task");
         if(decision == 0){
@@ -59,11 +59,14 @@ public class AppManager implements Manager{
             data.add(newTask);
         }
 
-        selectedGoal.setTasksTotalCount(selectedGoal.getTasksTotalCount() + 1);
+        goal.setTasksTotalCount(goal.getTasksTotalCount() + 1);
     }
 
     public Section selectSection(){
         ArrayList<Section> sections = (ArrayList<Section>) keeper.getLibrary().getData();
+        if(Main.checker.isEmpty(sections, "You don't have any sections, let's create one.")){
+            sections.add(builder.buildSection());
+        }
         String[] sectionNames = new String[sections.size()];
         for (int i = 0; i < sections.size(); i++) {
             Section section = sections.get(i);
@@ -71,7 +74,7 @@ public class AppManager implements Manager{
         }
         int selectedSectionNumber = Helper.selectOption("Which section do you want to select?",
                 sectionNames);
-        if( selectedSectionNumber > sections.size()) return null;
+        if( selectedSectionNumber >= sections.size()) return null;
         Section selectedSection = sections.get(selectedSectionNumber);
         return selectedSection;
     }
@@ -79,7 +82,11 @@ public class AppManager implements Manager{
 
 
     public Goal selectGoal(Section section){
+        if(checker.isNull(section)) return null;
         ArrayList<Goal> goals = (ArrayList<Goal>) section.getData();
+        if(Main.checker.isEmpty(goals, "You don't have any goals, let's create one.")){
+            goals.add(builder.buildGoal());
+        }
         String[] goalNames = new String[goals.size()];
         for (int i = 0; i < goals.size(); i++) {
             Goal goal = goals.get(i);
@@ -90,6 +97,37 @@ public class AppManager implements Manager{
         if( selectedGoalNumber > goals.size()) return null;
         Goal selectedGoal = goals.get(selectedGoalNumber);
         return selectedGoal;
+    }
+
+    public void viewSections(){
+        ArrayList<Section> sections = (ArrayList<Section>) keeper.getLibrary().getData();
+        String[] sectionNames = new String[sections.size()];
+        for (int i = 0; i < sections.size(); i++) {
+            Section section = sections.get(i);
+            sectionNames[i] = section.getClass().getName() +" "+section.getName();
+        }
+       Helper.showOptions(sectionNames);
+    }
+
+    public void viewGoals(Section section){
+        ArrayList<Goal> goals = (ArrayList<Goal>) section.getData();
+        String[] goalNames = new String[goals.size()];
+        for (int i = 0; i < goals.size(); i++) {
+            Goal goal = goals.get(i);
+            goalNames[i] = goal.getClass().getName() +" "+goal.getName();
+        }
+        Helper.showOptions(goalNames);
+
+    }
+
+    public void viewTasks(Goal goal){
+        ArrayList<Task> tasks = (ArrayList<Task>) goal.getTasks();
+        String[] taskNames = new String[tasks.size()];
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            taskNames[i] = task.getClass().getName() +" "+task.getName();
+        }
+        Helper.showOptions(taskNames);
     }
 
     public AbstractAim createAim(String type, Boolean isStrict){

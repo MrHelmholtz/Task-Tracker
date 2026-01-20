@@ -1,8 +1,8 @@
 public abstract class Keeper {
     private Library library;
 
-    Keeper(){
-
+    Keeper(Library library){
+        this.library = library;
     }
 
     public Library getLibrary() {

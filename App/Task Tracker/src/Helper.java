@@ -55,7 +55,7 @@ public class Helper {
         System.out.println(options.length+1+")"+"Exit");
     }
 
-    public void
+
 
     static int adjustMenu(String question){
         int looper = -1;
