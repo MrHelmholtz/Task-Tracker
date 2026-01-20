@@ -1,23 +1,33 @@
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    static public AppLoader loader = new AppLoader();
+    static public AppKeeper keeper = new AppKeeper(loader.fetch());
     static public AppBuilder builder = new AppBuilder();
-    static public AppKeeper keeper = new AppKeeper(buildTestLibrary());
+//                static public AppKeeper keeper = new AppKeeper(buildTestLibrary());
     static public AppChecker checker = new AppChecker();
     static public AppManager manager = new AppManager(keeper, builder, checker);
 
     public static void main(String[] args) throws IOException {
+
+//        AppKeeper keeper = new AppKeeper(buildTestLibrary());
+//        AppBuilder builder = new AppBuilder();
+//        AppChecker checker = new AppChecker();
+//        AppManager manager = new AppManager(keeper, builder, checker);
+
 
         int mainChoice;
         String[] mainMenuOptions = {"View", "Add"};
         int innerChoice;
         String[] innerMenuOptions;
         do {
-            if(checker.isNull(keeper.getLibrary(), "Library isn't initialized.")){
+            if (checker.isNull(keeper.getLibrary(), "Library isn't initialized.")) {
                 return;
             }
             mainChoice = Helper.selectOption("\nWelcome to Task Tracker 1.0!\nWhat do you want to do?",
@@ -27,15 +37,14 @@ public class Main {
             switch (mainChoice) {
 
 
-
                 case 0:
 
                     innerMenuOptions = new String[]{"View sections", "View goals", "View tasks"};
-                    do{
+                    do {
                         innerChoice = Helper.selectOption("\nWhat do you want to view?",
                                 innerMenuOptions);
 
-                        switch (innerChoice){
+                        switch (innerChoice) {
                             case 0:
                                 manager.viewSections();
                                 break;
@@ -50,16 +59,16 @@ public class Main {
                                 break;
                         }
 
-                    }while(innerChoice != innerMenuOptions.length);
+                    } while (innerChoice != innerMenuOptions.length);
                     break;
 
                 case 1:
                     innerMenuOptions = new String[]{"Add section", "Add goal", "Add task"};
-                    do{
+                    do {
                         innerChoice = Helper.selectOption("\nWhat do you want to add?",
                                 innerMenuOptions);
 
-                        switch (innerChoice){
+                        switch (innerChoice) {
                             case 0:
                                 manager.addSection();
                                 break;
@@ -74,7 +83,7 @@ public class Main {
                                 break;
                         }
 
-                    }while(innerChoice != innerMenuOptions.length);
+                    } while (innerChoice != innerMenuOptions.length);
                     break;
             }
         } while (mainChoice != mainMenuOptions.length);
@@ -93,6 +102,7 @@ public class Main {
         System.out.println(keeper.getLibrary().getData());
         System.out.println(keeper.getLibrary().getData());
 
+        loader.export(keeper.getLibrary());
     }
 
     public static void printAllTestObjects() throws IOException {

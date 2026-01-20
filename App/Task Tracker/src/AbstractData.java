@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public abstract class AbstractData {
+public abstract class AbstractData implements Serializable {
     private String name;
     private String description;
 

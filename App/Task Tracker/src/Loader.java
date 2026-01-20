@@ -1,4 +1,4 @@
 public interface Loader {
-    public void export();
+    public void export(Library library);
     public Library fetch();
 }
